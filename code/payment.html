@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color:green;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color:#fff;
+        }
+        label {
+        color:#fff;}
+
+        .prompt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .prompt label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prompt select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="7 7 13 7 10 12"></polygon></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            font-size: 16px;
+        }
+
+        .prompt input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .prompt input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .payment-field {
+            display: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Reg Fee</h2>
+        <form id="prompt">
+            <div class="prompt">
+                <label for="paid">Have you paid your registration fee?</label>
+                <select id="paid">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <input type="submit" value="CONTINUE">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('prompt').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var paid = document.getElementById('paid').value;
+            if (paid === 'no') {
+                // Show payment field
+                window.location.href = 'card.html';
+            } else {
+                // Redirect to course registration page if already paid
+                window.location.href = 'course-registration.html';
+            }
+        });
+
+        document.getElementById('paymentField').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Perform payment processing
+            // Simulating successful payment
+            alert('Payment successful.');
+            // Proceed to course registration page
+            window.location.href = 'course-registration.html';
+        });
+    </script>
+</body>
+</html>

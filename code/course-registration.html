@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Registration</title>
+  <style>
+            body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: green;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color:#fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color:#fff;
+        }
+   h1{
+            background-color: green;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      color:white;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+      
+    }
+
+    .advisers {
+      margin-top: 20px;
+    }
+
+    .advisers input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .now a {
+    color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Course Registration</h1>
+  <div class="container">
+  <div class="now">
+  <a href="homepage.html">Home</a>
+  <a href="login.html">Logout</a>
+  </div>
+    <div class="form-group">
+      <label for="level">Select your level:</label>
+      <select id="level">
+        <option value="100">100 Level</option>
+        <option value="200">200 Level</option>
+        <option value="300">300 Level</option>
+        <option value="400">400 Level</option>
+        <option value="500">500 Level</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button onclick="showCourses()">Select Level</button>
+    </div>
+
+    <div id="coursesContainer" style="display: none;">
+      <h2>Courses for Registration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Credits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" class="course" value="CSS 411 - ethical Web Design"> CSS 411 - ethical Web Design</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="course" value="CSS 412 - Research Methodology\"> CSS 412 - Research Methodology </td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="course" value="CSS 413 - incident responder"> CSS 413 - incident responder</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="course" value="CSS 414 - forensic Techniques"> CSS 414 -forensic Techniques</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="course" value="CSS 415- web Frameworks"> CSS 415 - web Frameworks</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="course" value="CSS 416 - Cloud computing"> CSS 416 - Cloud computing</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="course" value="CSS 417 - SOE"> CSS 417 - SOE</td>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+      <button onclick="showSummary()">Done</button>
+    </div>
+
+    <div id="summary" style="display: none;">
+      <h2>Course Selected</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Credits</th>
+          </tr>
+        </thead>
+        <tbody id="summaryBody"></tbody>
+      </table>
+      <div id="totalCredit">Total Credits: <span id="totalCredits">0</span></div>
+      <div class="advisers">
+        <input type="text" id="levelAdviser" placeholder="Level Adviser">
+        <input type="text" id="hod" placeholder="HOD">
+      </div>
+      <button onclick="printSummary()">Print</button>
+    </div>
+  </div>
+
+  <script>
+    function showCourses() {
+      document.getElementById('coursesContainer').style.display = 'block';
+      document.querySelector('button').style.display = 'none'; // Hide select button
+    }
+
+    function showSummary() {
+      var selectedCourses = document.getElementsByClassName('course');
+      var summaryBody = document.getElementById('summaryBody');
+      var totalCredits = 0; // Initialize total credits
+      
+      summaryBody.innerHTML = ''; // Clear previous summary
+      
+      for (var i = 0; i < selectedCourses.length; i++) {
+        if (selectedCourses[i].checked) {
+          var courseName = selectedCourses[i].value;
+          var creditUnit = parseInt(selectedCourses[i].parentNode.nextElementSibling.textContent);
+          var row = "<tr><td>" + courseName + "</td><td>" + creditUnit + "</td></tr>";
+          summaryBody.innerHTML += row;
+          totalCredits += creditUnit; // Add credit unit to total
+        }
+      }
+
+      document.getElementById('totalCredits').textContent = totalCredits; // Update total credits
+      document.getElementById('summary').style.display = 'block'; // Show summary
+    }
+
+    function printSummary() {
+      window.print();
+    }
+  </script>
+</body>
+</html>

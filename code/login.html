@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: green;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color:#fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color:#fff;
+        }
+
+        select, input[type="text"], input[type="password"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+   
+         
+        }
+           .forgot-password {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration:none;
+        }
+     
+   
+    </style>
+</head>
+<body>
+    <?php 
+    include 'db_connection.php'; 
+    ?>
+  
+    <div class="container">
+        <h2>Student/Staff Login</h2>
+        <form id="categoryForm" action="#">
+            <label for="category">Select Category:</label>
+            <select id="category">
+                <option value="">Select</option>
+                <option value="student">Student</option>
+                <option value="staff">Staff</option>
+            </select>
+            <input type="submit" value="Continue">
+        </form>
+
+        <form id="loginForm" style="display: none;">
+            <label for="email">student email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" minlength = "6" id="password" name="password" required>
+            <input type="submit" value="Login">
+            <div class="forgot-password">
+                <a href="forgot_password.html">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('categoryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var category = document.getElementById('category').value;
+            if (category === '') {
+                alert('Please select a category');
+                return;
+            }
+            document.getElementById('categoryForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Simulating login process
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            // Here you would perform actual login authentication,
+            // for this example, let's assume the login is successful
+            // Redirect user to payment page
+            window.location.href = 'payment.html';
+        });
+    </script>
+</body>
+</html>
